@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+
+  <!-- CSS -->
+  <!-- Add Material font (Roboto) and Material icon as needed -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="jumbotron text-center">
+
+      <h1 class="display-1">Material Trivia Quiz</h1>
+
+    </div>
+
+  </header>
+
+  <div class="container text-center startButton">
+
+    <button id="startButton">
+      <h1>Start</h1>
+    </button>
+
+  </div>
+
+  <section class="content" style="display: none;">
+
+    <div class="container text-center">
+
+      <h3>Time remaining:
+        <span id="time_remaining">30</span>
+      </h3>
+
+      <h3>Which company is responsible for material design?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="false">Apple</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="false">Twitter</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="true">Google</label>
+
+      <h3>Is it possible to customize material design?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q2" data-answer="true">Yes</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q2" data-answer="false">No</label>
+
+      <h3>Which component is typically used to show notfications?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="false">Chips</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="true">Snackbars</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="false">Cards</label>
+
+    </div>
+
+  </section>
+
+  <section class="results" style="display: none;">
+
+    <div class="container text-center">
+
+      <h3>All done!</h3>
+
+      <h3>Correct Answers:
+        <span id="correct answers"></span>
+      </h3>
+
+      <h3>Incorrect Answers:
+        <span id="incorrect_answers">30</span>
+      </h3>
+
+      <h3>Unanswered:
+        <span id="Unanswered">30</span>
+      </h3>
+
+      <h3>Which company is responsible for material design?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="false">Apple</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="false">Twitter</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q1" data-answer="true">Google</label>
+
+      <h3>Is it possible to customize material design?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q2" data-answer="true">Yes</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q2" data-answer="false">No</label>
+
+      <h3>Which component is typically used to show notfications?</h3>
+
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="false">Chips</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="true">Snackbars</label>
+      <label class="radio-inline">
+        <input type="radio" name="optradio" class="q3" data-answer="false">Cards</label>
+
+    </div>
+
+  </section>
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  <!-- Then my script -->
+  <script>
+
+    // Update results as they answer questions
+    let q1result = false
+    let q2result = false
+    let q3result = false
+
+    let q1answered = false
+    let q2answered = false
+    let q3answered = false
+
+    let correctAnswers = 0
+    let incorrectAnswers = 0
+    let Unanswered = 0
+
+    let timeRemaining = 30
+
+    let timer = {}
+
+    $(".q1").on("change", function () {
+
+      q1result = $(this).attr("data-answer")
+      q1answered = true
+    })
+
+    $(".q2").on("change", function () {
+
+      q2result = $(this).attr("data-answer")
+      q2answered = true
+    })
+
+    $(".q3").on("change", function () {
+
+      q3result = $(this).attr("data-answer")
+      q3answered = false
+    })
+
+    $("#startButton").on("click", function () {
+
+      $(".startButton").css("display", "none")
+      $(".content").css("display", "block")
+
+      timer = setInterval(function () {
+
+        timeRemaining--
+        if (timeRemaining <= 0) {
+
+          if (q1answered) {
+
+            if (q1result) {
+
+            }
+
+          }
+        }
+      })
+    })
+
+
+
+  </script>
+</body>
+
+</html>
