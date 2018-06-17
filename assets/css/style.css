@@ -1,0 +1,16 @@
+input {
+    margin-right: 6px
+}
+
+label {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 16pt;
+}
+
+body {
+    
+    background-image: url(../images/race_background.png)
+}
